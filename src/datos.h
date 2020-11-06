@@ -14,10 +14,16 @@ struct Deposito {
     const int limite {10000};
 };
 
+struct Retiro {
+	int monto;
+	const int limite {5000};
+};
+
 struct Cliente {
     string tarjeta {};
     FechaExpiracion fechaExpiracion {};
-    Deposito datosDeposito {};
+    Deposito deposito {};
+    Retiro retiro {};
     int NIP {};
     double saldo {};
 };

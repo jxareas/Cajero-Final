@@ -1,5 +1,6 @@
 #include <iostream>
 #include <windows.h>
+#include <cstdlib>
 #include "menu.h"
 #include "tarjeta.h"
 #include "operacionesCajero.h"
@@ -8,35 +9,42 @@ using namespace std;
 
 void iniciarPrograma() {
 
-    Sleep(1000);
+    Sleep(1500);
     cout << "\n\t\t\t\t\t\tIniciando el programa. Por favor, espere....." << endl;
-    Sleep(1000);
     cout << "\n\t\t\t\t\t\tCargando....." << endl;
-    Sleep(1000 );
+    Sleep(1500 );
+
+
 }
 
 void salirPrograma()
 {
+	system("cls");
     cout << "\t\t\t\t\tSaliendo del programa..." << endl;
-    Sleep(1000 );
+    Sleep(1500);
+    system("cls");
     cout << "\n\n\t\t\t\t\t-------------------ALERTA------------------" << endl;
-            cout << "\t\t\t\t\t Se ha salido del programa de manera exitosa" << endl;
-            cout << "\t\t\t\t\t||-------------------------------------------||" << endl;
+    cout << "\t\t\t\t\t Se ha salido del programa de manera exitosa." << endl;
+    cout << "\t\t\t\t\t||-------------------------------------------||" << endl;
+    Sleep(1500);
     exit(0);
 }
 
 void cerrarPrograma()
 {
-	cerr << "\n\n\t\t\t\t\t||-------------------ALERTA------------------||" << endl;
-	cerr << "\n\t\t\t\t\t\tSe ha excedido el numero de intentos (3). " << endl;
-	cerr << "\n\t\t\t\t\t\tSe cerrara el programa por motivos de seguridad." << endl;
-	cerr << "\t\t\t\t\t||-------------------------------------------||" << endl;
-
+	system("cls");
+	Sleep(1000);
+	cerr << "\n\n\t\t\t\t\t||---------------------ALERTA--------------------||" << endl;
+	cerr << "\n\t\t\t\t\tSe ha excedido el numero de intentos (3). " << endl;
+	cerr << "\n\t\t\t\t\tSe ha cerrado el programa por motivos de seguridad." << endl;
+	cerr << "\t\t\t\t\t||-----------------------------------------------||" << endl;
+	Sleep(2000);
     exit(0);
 }
 
 
 void menuInicio() {
+	system("cls");
     cout << "\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t||-------------------------------------------||" << endl;
     cout << "\t\t\t\t\t||             CAJERO AUTOMATICO             ||" << endl;
     cout << "\t\t\t\t\t||-------------------------------------------||";
@@ -58,10 +66,10 @@ void menuInicio() {
     if (esRegistroValido(usuario.tarjeta, usuario.fechaExpiracion.mes, usuario.fechaExpiracion.anio, usuario.NIP)) {
         cout << "\n\n\n\t\t\t\t\t\tAcceso Concedido! \n";
         cout << "\n\t\t\t\t\t\tCargando Sistema..." << endl;
-        Sleep(1000);
         menuPrincipal();
     }
     else {
+    	Sleep(1000);
         cout << "\n\n\t\t\t\t\t\t\tAcceso Denegado..." << endl;
         intentos--;
         (intentos == 0) ? cerrarPrograma() : menuInicio();
@@ -71,6 +79,8 @@ void menuInicio() {
 
 void menuPrincipal()
 {
+	Sleep(1000);
+	system("cls");
     int opcion {};
     cout << "\n\t\t\t	///////////////////////////////////////////////////////////"<<endl;
     cout << "\t\t\t\t                      CAJERO AUTOMATICO                "<<endl;
@@ -99,19 +109,21 @@ void menuPrincipal()
     switch(opcion)
     {
         case 1:
-            deposito();
+            depositar();
             break;
         case 2:
-            retiro();
+            retirar();
             break;
-        case 3: transferencia();
+        case 3: transferir();
             break;
         case 4:
             verEstadoCuenta();
             break;
         case 5: cambiarPIN();
             break;
-        case 6: menuInicio();
+        case 6:
+        	intentos = 3; //Reinicia el numero de intentos validos
+        	menuInicio();
             break;
         case 7: salirPrograma();
             break;

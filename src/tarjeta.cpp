@@ -12,7 +12,9 @@ void vectorizar(string x, int n, int V[]) //Modifica un vector (por referencia),
             else throw invalid_argument("\n\n\t\t\t\t\t\tEl numero de la tarjeta contiene caracteres no numericos");
         }
     } catch (const invalid_argument& e) {
-        cout << e.what() << endl;
+    	cout << "\n\n\t\t\t\t\t-------------------ALERTA------------------" << endl;
+    	cout << "\t\t\t  " << e.what() << endl;
+    	cout << "\t\t\t\t\t||-------------------------------------------||" << endl;
     }
 }
 

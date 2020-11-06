@@ -6,12 +6,12 @@
 #include "tarjeta.h"
 using namespace std;
 
-void deposito()
+void depositar()
 {
     int opcion{};
     cout << "\n\n\n\t\t\t	///////////////////////////////////////////////////////////"<<endl;
-    cout << "\n\t\t\t CAMBIO DE NUMERO NIP " << endl;
-    cout << "\n\t\t\ttCuenta de usuario: " << usuario.tarjeta << endl;
+    cout << "\n\t\t\t REALIZAR DEPOSITO " << endl;
+    cout << "\n\t\t\tCuenta de usuario: " << usuario.tarjeta << endl;
     cout << "\t\t\t	///////////////////////////////////////////////////////////"<<endl;
     cout << "\t\t\t	|1. 1000 C$"<<"------------------|"<<"#Cnb81353"<<" |"<<endl;
     cout << "\t\t\t	|2. 2500 C$"<<"-----------------|"<<" |"<<endl;
@@ -19,7 +19,7 @@ void deposito()
     cout << "\t\t\t	|4. 10'000 C$"<<"--------------------|"<<" |"<<endl;
     cout << "\t\t\t	|5. 25'000 C$"<<"----------------------|"<<" |"<<endl;
     cout << "\t\t\t	|6. Salir al Menu de Opciones"<<"----------------------|"<<" |"<<endl;
-    cout << "\t\t\t5260517111021389	Opcion a seleccionar: ";
+    cout << "\t\t\t	Opcion a seleccionar: ";
     cin >> opcion;
     switch (opcion)
     {
@@ -42,42 +42,68 @@ void deposito()
             menuOpcion();
             break;
         default: cout << "\n\t\t Opcion Invalida. Por favor, intentelo de nuevo." << endl;
-            deposito();
+            depositar();
     }
     cout << "\n\t\t Se ha realizado el deposito de manera exitosa." << endl;
     menuOpcion();
 }
 
 
-void retiro() {
-
+void retirar() {
+	 int opcion{};
+	    cout << "\n\n\n\t\t\t	///////////////////////////////////////////////////////////"<<endl;
+	    cout << "\n\t\t\t REALIZAR RETIRO " << endl;
+	    cout << "\n\t\t\ttCuenta de usuario: " << usuario.tarjeta << endl;
+	    cout << "\t\t\t	///////////////////////////////////////////////////////////"<<endl;
+	    cout << "\t\t\t	|1. 1000 C$"<<"------------------|"<<"#Cnb81353"<<" |"<<endl;
+	    cout << "\t\t\t	|2. 2500 C$"<<"-----------------|"<<" |"<<endl;
+	    cout << "\t\t\t	|3. 5000 C$"<<"-----------------|"<<" |"<<endl;
+	    cout << "\t\t\t	Opcion a seleccionar: ";
+	    cin >> opcion;
+	    switch (opcion)
+	        {
+	            case 1:
+	                usuario.saldo -= 1000;
+	                break;
+	            case 2:
+	                usuario.saldo -= 2000;
+	                break;
+	            case 3:
+	                usuario.saldo -= 5000;
+	                break;
+	            default: cout << "\n\t\t Opcion Invalida. Por favor, intentelo de nuevo." << endl;
+	            retirar();
+	        }
+	    cout << "\n\t\t Se ha realizado el deposito de manera exitosa." << endl;
+	        menuOpcion();
 }
 
 
-void transferencia()
+void transferir()
 {
     int opcion{};
     cout << "\n\t\t   Ingrese el numero de la tarjeta destino para depositar:" << endl;
-    cin >> usuario.datosDeposito.cuentaDestino;
+    cin >> usuario.deposito.cuentaDestino;
 
 
-    if (esTarjetaValida(usuario.datosDeposito.cuentaDestino, usuario.datosDeposito.cuentaDestino.length())) {
+    if (esTarjetaValida(usuario.deposito.cuentaDestino, usuario.deposito.cuentaDestino.length())) {
         cout << "\t\tIngrese el monto a depositar. El monto debe ser menos a 10,000 cordobas:" << endl;
-        cin >> usuario.datosDeposito.monto;
-        if (usuario.datosDeposito.monto > usuario.datosDeposito.limite) {
-            cout << "\t\tEl monto debe ser menor a " << usuario.datosDeposito.limite << " C$." << endl;
+        cin >> usuario.deposito.monto;
+        if (usuario.deposito.monto > usuario.deposito.limite) {
+            cout << "\t\tEl monto debe ser menor a " << usuario.deposito.limite << " C$." << endl;
             Sleep(1000);
-            transferencia();
+            transferir();
         }
-        else if (usuario.datosDeposito.monto > usuario.saldo) {
+        else if (usuario.deposito.monto > usuario.saldo) {
             cout << "\n\t\tUsted no cuenta con los saldos suficientes para realizar esta transaccion. Presione 1 para intentarlo de nuevo." << endl;
             cout << "\t\tPresione otra tecla para salir del Menu de Transferencia." << endl;
             cout << "\t\t	Opcion a seleccionar: ";
             cin >> opcion;
-            (opcion == 1) ? transferencia() : menuOpcion();
+            (opcion == 1) ? transferir() : menuOpcion();
         }
         else {
                 Sleep(1000);
+                usuario.saldo -= usuario.deposito.monto;
                 cout << "Se ha realizado el deposito de manera exitosa." << endl;
                 menuOpcion();
         }
@@ -87,7 +113,7 @@ void transferencia()
         cout << "\t\tPresione otra tecla para salir del Menu de Transferencia." << endl;
         cout << "\t\t	Opcion a seleccionar: ";
         cin >> opcion;
-        (opcion == 1) ? transferencia() : menuOpcion();
+        (opcion == 1) ? transferir() : menuOpcion();
 
     }
     }

@@ -2,9 +2,9 @@
 #ifndef OPERACIONESCAJERO_H_
 #define OPERACIONESCAJERO_H_
 
-void deposito();
-void retiro();
-void transferencia();
+void depositar();
+void retirar();
+void transferir();
 void verEstadoCuenta();
 void cambiarPIN();
 
