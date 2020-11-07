@@ -8,7 +8,7 @@ struct FechaExpiracion {
     int anio;
 };
 
-struct Deposito {
+struct Transferencia {
     string cuentaDestino {};
     int monto {};
     const int limite {10000};
@@ -22,7 +22,7 @@ struct Retiro {
 struct Cliente {
     string tarjeta {};
     FechaExpiracion fechaExpiracion {};
-    Deposito deposito {};
+    Transferencia transferencia {};
     Retiro retiro {};
     int NIP {};
     double saldo {};

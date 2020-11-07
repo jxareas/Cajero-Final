@@ -3,11 +3,11 @@
 #include "datos.h"
 
 void iniciarPrograma();
-void menuInicio();
-void menuPrincipal();
-void menuOpcion();
 void salirPrograma();
 void cerrarPrograma();
+void menuInicio();
+void menuPrincipal();
+void menuAuxiliar();
 
 
 

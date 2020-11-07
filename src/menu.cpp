@@ -5,11 +5,13 @@
 #include "tarjeta.h"
 #include "operacionesCajero.h"
 #include "globals.h"
+#include "GUI.h"
 using namespace std;
 
 void iniciarPrograma() {
 
     Sleep(1500);
+    GUIreiniciar();
     cout << "\n\t\t\t\t\t\tIniciando el programa. Por favor, espere....." << endl;
     cout << "\n\t\t\t\t\t\tCargando....." << endl;
     Sleep(1500 );
@@ -19,59 +21,66 @@ void iniciarPrograma() {
 
 void salirPrograma()
 {
-	system("cls");
+	Sleep(1000);
+	GUItareaExitosa();
     cout << "\t\t\t\t\tSaliendo del programa..." << endl;
-    Sleep(1500);
+    Sleep(2000);
     system("cls");
-    cout << "\n\n\t\t\t\t\t-------------------ALERTA------------------" << endl;
-    cout << "\t\t\t\t\t Se ha salido del programa de manera exitosa." << endl;
-    cout << "\t\t\t\t\t||-------------------------------------------||" << endl;
-    Sleep(1500);
+    cerr << "\n\n\t\t\t\t\t||---------------------ALERTA--------------------||" << endl;
+    cerr << "\n\t\t\t\t\tSe ha salido del programa de manera exitosa. " << endl;
+    cerr << "\t\t\t\t\t||-----------------------------------------------||" << endl;
+    Sleep(8000);
     exit(0);
 }
 
 void cerrarPrograma()
 {
-	system("cls");
+	GUIerror();
 	Sleep(1000);
 	cerr << "\n\n\t\t\t\t\t||---------------------ALERTA--------------------||" << endl;
 	cerr << "\n\t\t\t\t\tSe ha excedido el numero de intentos (3). " << endl;
 	cerr << "\n\t\t\t\t\tSe ha cerrado el programa por motivos de seguridad." << endl;
 	cerr << "\t\t\t\t\t||-----------------------------------------------||" << endl;
-	Sleep(2000);
+	Sleep(8000);
     exit(0);
 }
 
 
 void menuInicio() {
-	system("cls");
-    cout << "\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t||-------------------------------------------||" << endl;
+	GUIreiniciar();
+    cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t||-------------------------------------------||" << endl;
     cout << "\t\t\t\t\t||             CAJERO AUTOMATICO             ||" << endl;
     cout << "\t\t\t\t\t||-------------------------------------------||";
     cout << "\n\t\t\t\t\t||\t      INICIO DE SESION  \t     ||" << endl;
     cout << "\t\t\t\t\t||-------------------------------------------||" << endl;
     cout << "\t\t\t\t\tEstimado cliente, favor introduzca los siguientes datos. " << endl;
-    cout << "\t\t\t\t\tNumero de tarjeta de credito: ";
+    cout << "\n\t\t\t\t\tNumero de tarjeta de credito: ";
     cin >> usuario.tarjeta;
-    cout << "\t\t\t\t\tMes de Expiracion: ";
+    cout << "\n\t\t\t\t\tMes de Expiracion: ";
     fflush(stdin);
     cin >> usuario.fechaExpiracion.mes;
-    cout << "\t\t\t\t\tAnio de Expiracion: ";
+    cout << "\n\t\t\t\t\tAnio de Expiracion: ";
     fflush(stdin);
     cin >> usuario.fechaExpiracion.anio;
-    cout << "\t\t\t\t\tCodigo PIN: ";
+    cout << "\n\t\t\t\t\tCodigo PIN: ";
     cin >> usuario.NIP;
 
 
     if (esRegistroValido(usuario.tarjeta, usuario.fechaExpiracion.mes, usuario.fechaExpiracion.anio, usuario.NIP)) {
-        cout << "\n\n\n\t\t\t\t\t\tAcceso Concedido! \n";
-        cout << "\n\t\t\t\t\t\tCargando Sistema..." << endl;
+        GUItareaExitosa();
+        cout << "\n\n\t\t\t\t\t----------------------ALERTA------------------" << endl;
+        cout << "\n\t\t\t\t\t\t\t ACCESO CONCEDIDO." << endl;
+        cout << "\t\t\t\t\t||-------------------------------------------||" << endl;
+        Sleep(1500);
         menuPrincipal();
     }
     else {
-    	Sleep(1000);
-        cout << "\n\n\t\t\t\t\t\t\tAcceso Denegado..." << endl;
+        GUIerror();
+    	cout << "\n\n\t\t\t\t\t----------------------ALERTA------------------" << endl;
+    	cout << "\n\t\t\t\t\t\t\t ACCESO DENEGADO." << endl;
+    	cout << "\t\t\t\t\t||-------------------------------------------||" << endl;
         intentos--;
+        Sleep(1500);
         (intentos == 0) ? cerrarPrograma() : menuInicio();
     }
 }
@@ -80,7 +89,7 @@ void menuInicio() {
 void menuPrincipal()
 {
 	Sleep(1000);
-	system("cls");
+	GUIreiniciar();
     int opcion {};
     cout << "\n\t\t\t	///////////////////////////////////////////////////////////"<<endl;
     cout << "\t\t\t\t                      CAJERO AUTOMATICO                "<<endl;
@@ -114,7 +123,8 @@ void menuPrincipal()
         case 2:
             retirar();
             break;
-        case 3: transferir();
+        case 3:
+        	transferir();
             break;
         case 4:
             verEstadoCuenta();
@@ -132,9 +142,10 @@ void menuPrincipal()
     }
 }
 
-void menuOpcion()
+void menuAuxiliar()
 {
     int opcion {};
+    GUIreiniciar();
     cout << "\n\t\t\t	///////////////////////MENU OPCION/////////////////////////"<<endl;
     cout << "\t\t\t\t Por favor, seleccione una de las siguientes opciones: " << endl;
     cout << "\t\t\t	///////////////////////////////////////////////////////////"<<endl;
@@ -155,8 +166,9 @@ void menuOpcion()
         case 3: salirPrograma();
             break;
         default: cout << "\n\t\t\tOpcion Invalida. Por favor, intentelo de nuevo,";
-            menuOpcion();
+            menuAuxiliar();
     }
 
 }
+
 
