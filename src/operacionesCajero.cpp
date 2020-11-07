@@ -8,6 +8,27 @@
 #include "GUI.h"
 using namespace std;
 
+void esTransaccionValida(int monto, int limite)
+{
+	if(monto < 0)
+		{
+			GUIsaldoNegativo();
+		}
+
+		else if (monto > limite) {
+					GUIlimiteExcedido(limite);
+					menuPrincipal();
+		        }
+	    else if (monto > usuario.saldo) {
+		            GUIsaldoInsuficiente();
+		            menuPrincipal();
+		        }
+		        else {
+		                usuario.saldo -= monto;
+		                GUIoperacionExitosa();
+		        }
+}
+
 void depositar()
 {
     int opcion{};
@@ -57,19 +78,7 @@ void retirar()
 	GUIreiniciar();
 	cout << "\t\t\t Ingrese la cantidad a retirar: ";
 	cin >> usuario.retiro.monto;
-	if (usuario.retiro.monto > usuario.retiro.limite) {
-				GUIlimiteExcedido(usuario.retiro.limite);
-	            retirar();
-	        }
-	        else if (usuario.retiro.monto > usuario.saldo) {
-	            GUIsaldoInsuficiente();
-	            retirar();
-	        }
-	        else {
-	                usuario.saldo -= usuario.retiro.monto;
-	                GUIoperacionExitosa();
-	        }
-
+	esTransaccionValida(usuario.retiro.monto, usuario.retiro.limite);
 }
 
 
@@ -83,19 +92,9 @@ void transferir()
 
 		if (esTarjetaValida(usuario.transferencia.cuentaDestino, usuario.transferencia.cuentaDestino.length()))
 		{
-			if (usuario.transferencia.monto > usuario.transferencia.limite) {
-							GUIlimiteExcedido(usuario.transferencia.limite);
-				            transferir();
-				        }
-				        else if (usuario.transferencia.monto > usuario.saldo) {
-				            GUIsaldoInsuficiente();
-				            transferir();
-				        }
-				        else {
-				                usuario.saldo -= usuario.transferencia.monto;
-				                GUIoperacionExitosa();
-				        }
-		} else {
+			esTransaccionValida(usuario.transferencia.monto, usuario.transferencia.limite);
+		}
+	     else {
 			GUItarjetaInvalida();
 			transferir();
 		}
@@ -116,7 +115,7 @@ void verEstadoCuenta()
 	cout << "\n\t\t\t\t Codigo NIP: " << usuario.NIP << endl;
 	cout << "\n\t\t\t	///////////////////////////////////////////////////////////"<<endl;
     system("pause");
-    menuAuxiliar();
+    menuPrincipal();
 }
 
 void cambiarPIN()

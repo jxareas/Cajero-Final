@@ -37,7 +37,7 @@ void GUIlimiteExcedido(int limite)
 {
 	GUIerror();
 			cout << "\n\n\t\t\t\t\t-------------------ALERTA------------------" << endl;
-		    cout << "\t\t\t\t\t El monto debe ser menor a " << limite << endl;
+		    cout << "\t\t\t\t\t El monto debe ser menor o igual a " << limite << endl;
 			cout << "\t\t\t\t\t||-------------------------------------------||" << endl;
 			Sleep(2000);
 }
@@ -70,13 +70,23 @@ void GUIoperacionExitosa()
     menuPrincipal();
 }
 
+void GUIsaldoNegativo()
+{
+	GUIerror();
+	cout << "\n\n\t\t\t\t\t--------------------ERROR------------------" << endl;
+	cout << "\t\t\t\t\t\t      El saldo ingresado NO puede ser negativo." << endl;
+	cout << "\t\t\t\t\t||-------------------------------------------||" << endl;
+	Sleep(1000);
+	menuPrincipal();
+}
+
 void GUIpinInvalido()
 {
 
 	GUIerror();
-	cout << "\n\n\t\t\t\t\t--------------------ALERTA------------------" << endl;
-	    	cout << "\t\t\t\t\t\t      NUMERO PIN INVALIDO" << endl;
-	    	cout << "\t\t\t\t\t||-------------------------------------------||" << endl;
-	    	Sleep(1000);
+    cout << "\n\n\t\t\t\t\t--------------------ALERTA------------------" << endl;
+    cout << "\t\t\t\t\t\t      NUMERO PIN INVALIDO" << endl;
+    cout << "\t\t\t\t\t||-------------------------------------------||" << endl;
+    Sleep(1000);
 }
 

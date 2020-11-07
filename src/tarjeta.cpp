@@ -7,9 +7,9 @@ void vectorizar(string x, int n, int V[]) //Modifica un vector (por referencia),
 {
 	try {
         for (int i = 0; i < n; i++) {
-            if (isdigit(x[i]))
+            if (isdigit(x[i]) >= 0 && n > 10)
                 V[i] = x[i] - '0';
-            else throw invalid_argument("\n\n\t\t\t\t\t\tEl numero de la tarjeta contiene caracteres no numericos");
+            else throw invalid_argument("\n\n\t\t\t\t\t\tEl numero de la tarjeta contiene caracteres invalidos.");
         }
 	}
 catch(const invalid_argument& e) {
