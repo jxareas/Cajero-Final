@@ -1,5 +1,5 @@
-#ifndef OPERACIONESCAJERO_H_
-#define OPERACIONESCAJERO_H_
+#ifndef CAJERO_H_
+#define CAJERO_H_
 
 void esTransaccionValida(int monto, int limite);
 
@@ -14,4 +14,4 @@ void verEstadoCuenta();
 void cambiarPIN();
 
 
-#endif /* OPERACIONESCAJERO_H_ */
+#endif /* CAJERO_H_ */

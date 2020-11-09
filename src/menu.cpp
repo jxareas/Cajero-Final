@@ -2,9 +2,10 @@
 #include <windows.h>
 #include <cstdlib>
 #include "menu.h"
+
+#include "cajero.h"
+#include "globales.h"
 #include "tarjeta.h"
-#include "operacionesCajero.h"
-#include "globals.h"
 #include "GUI.h"
 
 using namespace std;
@@ -46,8 +47,9 @@ void cerrarPrograma() {
 
 
 void menuInicio() {
-    intentos = 3;
     GUIreiniciar();
+    if (intentos == 0)
+    	cerrarPrograma();
     cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t||-------------------------------------------||" << endl;
     cout << "\t\t\t\t\t||             CAJERO AUTOMATICO             ||" << endl;
     cout << "\t\t\t\t\t||-------------------------------------------||";
@@ -69,20 +71,12 @@ void menuInicio() {
 
     if (esRegistroValido(usuarios[ind].tarjeta, usuarios[ind].fechaExpiracion.mes, usuarios[ind].fechaExpiracion.anio,
                          usuarios[ind].NIP)) {
-        GUImsgExito();
-        cout << "\n\n\t\t\t\t\t----------------------ALERTA------------------" << endl;
-        cout << "\n\t\t\t\t\t\t\t ACCESO CONCEDIDO." << endl;
-        cout << "\t\t\t\t\t||-------------------------------------------||" << endl;
-        Sleep(1500);
-        menuPrincipal();
-    } else {
-        GUImsgError();
-        cout << "\n\n\t\t\t\t\t----------------------ALERTA------------------" << endl;
-        cout << "\n\t\t\t\t\t\t\t ACCESO DENEGADO." << endl;
-        cout << "\t\t\t\t\t||-------------------------------------------||" << endl;
-        intentos--;
-        Sleep(1500);
-        (intentos == 0) ? cerrarPrograma() : menuInicio();
+    	GUIaccesoConcedido();
+    }
+    else {
+    	intentos--;
+    	GUIaccesoDenegado();
+    	menuInicio();
     }
 }
 
@@ -133,6 +127,7 @@ void menuPrincipal() {
             break;
         case 6:
             ind = (ind < 5) ? ind + 1 : 0; //Controla el indice del arreglo de estructuras
+            intentos = 3;
             menuInicio();
             break;
         case 7:
@@ -161,6 +156,7 @@ void menuAuxiliar() {
     switch (opcion) {
         case 1:
             ind = (ind < 5) ? ind + 1 : 0; //Controla el indice del arreglo de estructuras
+            intentos = 3;
             menuInicio();
             break;
         case 2:

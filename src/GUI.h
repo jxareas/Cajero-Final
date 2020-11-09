@@ -7,6 +7,10 @@ void GUImsgError();
 
 void GUImsgExito();
 
+void GUIaccesoConcedido();
+
+void GUIaccesoDenegado();
+
 void GUIopcionInvalida();
 
 void GUIsaldoInsuficiente();

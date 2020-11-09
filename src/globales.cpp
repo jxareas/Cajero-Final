@@ -1,4 +1,4 @@
-#include "globals.h"
+#include "globales.h"
 
 int ind{0};
 int intentos{3};

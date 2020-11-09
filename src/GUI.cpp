@@ -2,8 +2,9 @@
 #include <cstdlib>
 #include <iostream>
 #include "GUI.h"
+
+#include "cajero.h"
 #include "menu.h"
-#include "operacionesCajero.h"
 
 using namespace std;
 
@@ -20,6 +21,25 @@ void GUImsgError() {
 void GUImsgExito() {
     system("cls");
     system("color 0a");
+}
+
+void GUIaccesoConcedido()
+{
+    GUImsgExito();
+    cout << "\n\n\t\t\t\t\t----------------------ALERTA------------------" << endl;
+    cout << "\n\t\t\t\t\t\t\t ACCESO CONCEDIDO." << endl;
+    cout << "\t\t\t\t\t||-------------------------------------------||" << endl;
+    Sleep(1500);
+    menuPrincipal();
+}
+
+void GUIaccesoDenegado()
+{
+    GUImsgError();
+    cout << "\n\n\t\t\t\t\t----------------------ALERTA------------------" << endl;
+    cout << "\n\t\t\t\t\t\t\t ACCESO DENEGADO." << endl;
+    cout << "\t\t\t\t\t||-------------------------------------------||" << endl;
+    Sleep(1500);
 }
 
 void GUIopcionInvalida() {

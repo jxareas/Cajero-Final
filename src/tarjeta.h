@@ -5,13 +5,13 @@
 
 using namespace std;
 
-void vectorizar(string cadena, int longitud, int vector[]);
+void vectorizar(string cadena, int vector[]);
 
 bool verificarTarjeta(int *vector, int longitud);
 
 bool esFechaValida(int mes, int anio);
 
-bool esTarjetaValida(string tarjeta, int longitud);
+bool esTarjetaValida(string tarjeta);
 
 bool esRegistroValido(const string &cadena, int mes, int anio, int Pin);
 

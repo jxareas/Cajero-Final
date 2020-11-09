@@ -1,12 +1,13 @@
 #include <iostream>
 #include "tarjeta.h"
-#include "globals.h"
+
+#include "globales.h"
 
 using namespace std;
 
-void
-vectorizar(string x, int n, int V[]) //Modifica un vector (por referencia), dada una cadena de caracteres y su indice.
+void vectorizar(string x, int V[]) //Modifica un vector (por referencia), dada una cadena de caracteres y su indice.
 {
+	unsigned int n = x.length();
     try {
         for (int i = 0; i < n; i++) {
             if (isdigit(x[i]) >= 0 && n > 10)
@@ -40,10 +41,10 @@ bool verificarTarjeta(int *vector, int n) {
     return (sum % 10 == 0);
 }
 
-bool esTarjetaValida(string x, int n) {
-    int tarjeta[n];
-    vectorizar(move(x), n, tarjeta);
-    return verificarTarjeta(tarjeta, n);
+bool esTarjetaValida(string x) {
+    int tarjeta[x.length()];
+    vectorizar(x, tarjeta);
+    return verificarTarjeta(tarjeta, x.length());
 }
 
 bool esFechaValida(int mes, int anio) {
@@ -58,7 +59,7 @@ bool esFechaValida(int mes, int anio) {
 
 
 bool esRegistroValido(const string &cadena, int mes, int anio, int Pin) {
-    return (esTarjetaValida(cadena, cadena.length()) && esFechaValida(mes, anio) && Pin == PIN[ind]);
+    return (esTarjetaValida(cadena) && esFechaValida(mes, anio) && Pin == PIN[ind]);
 }
 
 

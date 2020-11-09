@@ -1,8 +1,9 @@
+#include "cajero.h"
+
 #include <iostream>
 #include <windows.h>
-#include "operacionesCajero.h"
+#include "globales.h"
 #include "menu.h"
-#include "globals.h"
 #include "tarjeta.h"
 #include "GUI.h"
 
@@ -85,8 +86,7 @@ void transferir() {
     cout << "\t\t\t Ingrese la cantidad a transferir: ";
     cin >> usuarios[ind].transferencia.monto;
 
-    if (esTarjetaValida(usuarios[ind].transferencia.cuentaDestino,
-                        usuarios[ind].transferencia.cuentaDestino.length())) {
+    if (esTarjetaValida(usuarios[ind].transferencia.cuentaDestino)) {
         esTransaccionValida(usuarios[ind].transferencia.monto, usuarios[ind].transferencia.limite);
     } else {
         GUItarjetaInvalida();

@@ -1,8 +1,6 @@
-#ifndef DATOS_H_
-#define DATOS_H_
-
+#ifndef MAIN_CPP_GLOBALS_H
+#define MAIN_CPP_GLOBALS_H
 #include <iostream>
-
 using namespace std;
 
 struct FechaExpiracion {
@@ -30,4 +28,11 @@ struct Cliente {
     double saldo{};
 };
 
-#endif /* DATOS_H_ */
+
+extern int ind;
+extern int intentos;
+extern int PIN[];
+extern Cliente usuarios[];
+
+
+#endif //MAIN_CPP_GLOBALS_H
